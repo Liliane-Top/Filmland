@@ -1,0 +1,14 @@
+openapi: "3.0.2"
+info:
+  title: Filmland
+  description: Assigment to show Sogeti my skills
+  version: "1.0"
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /login/{userId}:
+    get:
+      summary: ""
+      responses:
+        '200':
+          description: OK
