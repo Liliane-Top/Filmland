@@ -1,6 +1,8 @@
 package nl.filmland.filmland.service;
 
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import nl.filmland.dto.LoginDto;
 import nl.filmland.filmland.model.User;
 import nl.filmland.filmland.repository.UserDao;
 import org.springframework.stereotype.Service;
@@ -10,17 +12,25 @@ import org.springframework.stereotype.Service;
 public class LoginService {
   private final UserDao userDao;
 
-  public String executeLogin(User mpUser){
-    if (!userDao.existsByEmailAsUsername(mpUser.getEmailAsUsername())) {
-      return "User unknown";
+  public boolean validateUser(LoginDto loginDto){
+    if(loginDto == null || loginDto.getEmailAsUsername() == null || loginDto.getPassword()  == null){
+      return false;
     }
-
-    User user = userDao.findUserByEmailAsUsername(mpUser.getEmailAsUsername());
-    if (!user.getPassword().equals(mpUser.getPassword())){
-      return "Combination username and password invalid";
+    if (!userExists(loginDto)) {
+      return false;
     }
+    if(!passwordIsValid(loginDto)) {
+      return false;
+    }
+    return true;
+  }
 
-    return "You login is successful";
+  private boolean userExists(LoginDto loginDto) {
+    return userDao.existsByEmailAsUsername(loginDto.getEmailAsUsername());
+    }
+  private boolean passwordIsValid(LoginDto loginDto) {
+    User user = userDao.findUserByEmailAsUsername(loginDto.getEmailAsUsername());
+    return user.getPassword().equals(loginDto.getPassword());
   }
 
 

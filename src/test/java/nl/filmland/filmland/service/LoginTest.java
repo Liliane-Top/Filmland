@@ -1,17 +1,16 @@
-package nl.filmland.filmland.unittests;
+package nl.filmland.filmland.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import nl.filmland.filmland.model.User;
+import nl.filmland.dto.LoginDto;
 import nl.filmland.filmland.repository.UserDao;
-import nl.filmland.filmland.service.LoginService;
-import org.junit.jupiter.api.Assertions;
+import nl.filmland.filmland.testobjects.TestLoginDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LoginTests {
+class LoginTest {
 
   @Autowired
   LoginService subject;
@@ -31,24 +30,20 @@ class LoginTests {
 
   @Test
   void validatePassword_withUnknownUser(){
-    User unknownUser = User.builder().build();
-    assertEquals("User unknown", subject.executeLogin(unknownUser));
+    LoginDto unknownUser = TestLoginDto.createUnknowUser();
+    assertFalse(subject.validateUser(unknownUser));
   }
 
   @Test
   void validatePassword_withKnownUser_InvalidPassword() {
-    User knownUserWithInvalidPassword = User.builder()
-        .emailAsUsername("Italy@gmail.com")
-        .password("12345").build();
-    assertEquals("Combination username and password invalid", subject.executeLogin(knownUserWithInvalidPassword));
+    LoginDto knownUserWithInvalidPassword = TestLoginDto.createUserWithInvalidPassword();
+    assertFalse(subject.validateUser(knownUserWithInvalidPassword));
   }
 
   @Test
   void validatePassword_withValidCredentials() {
-    User knownUserWithInvalidPassword = User.builder()
-        .emailAsUsername("Italy@gmail.com")
-        .password("45678").build();
-    assertEquals("You login is successful", subject.executeLogin(knownUserWithInvalidPassword));
+   LoginDto knownUserWithInvalidPassword = TestLoginDto.createUserWithValidPassword();
+    assertTrue(subject.validateUser(knownUserWithInvalidPassword));
   }
 
 }
