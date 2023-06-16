@@ -3,14 +3,14 @@ package nl.filmland.filmland.service;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import nl.filmland.dto.LoginDto;
-import nl.filmland.filmland.repository.UserDao;
+import nl.filmland.filmland.repository.CustomerDao;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class LoginService {
 
-  private final UserDao userDao;
+  private final CustomerDao customerDao;
 
   public boolean validateUser(LoginDto loginDto) {
     return Optional.ofNullable(loginDto)
@@ -20,12 +20,12 @@ public class LoginService {
   }
 
   private boolean userExists(LoginDto loginDto) {
-    return userDao.existsByEmailAsUsername(loginDto.getEmailAsUsername());
+    return customerDao.existsByEmailAsUsername(loginDto.getEmailAsUsername());
   }
 
   private boolean passwordIsValid(LoginDto loginDto) {
-    return userDao
-        .findUserByEmailAsUsername(loginDto.getEmailAsUsername())
+    return customerDao
+        .findCustomerByEmailAsUsername(loginDto.getEmailAsUsername())
         .getPassword()
         .equals(loginDto.getPassword());
   }

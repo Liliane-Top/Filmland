@@ -1,16 +1,18 @@
 package nl.filmland.filmland.repository;
 
-import nl.filmland.filmland.model.User;
+import nl.filmland.filmland.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserDao extends JpaRepository<User, Long> {
+public interface CustomerDao extends JpaRepository<Customer, Long> {
 
-  User findUserByEmailAsUsername(String emailAsUsername);
+  Customer findCustomerByEmailAsUsername(String emailAsUsername);
 
-  User findUserById(Long id);
+  Customer findCustomerById(Long id);
 
   Boolean existsByEmailAsUsername(String emailAsUsername);
+
+
 
 }

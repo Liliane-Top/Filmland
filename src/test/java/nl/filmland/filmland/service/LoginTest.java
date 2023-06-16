@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import nl.filmland.dto.LoginDto;
-import nl.filmland.filmland.repository.UserDao;
+import nl.filmland.filmland.repository.CustomerDao;
 import nl.filmland.filmland.testobjects.TestLoginDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +17,17 @@ class LoginTest {
   @Autowired
   LoginService subject;
   @Autowired
-  UserDao userDao;
+  CustomerDao customerDao;
 
 
   @Test
   void getUserNameFromH2() {
-    assertEquals("France@gmail.com", userDao.findUserById(2L).getEmailAsUsername());
+    assertEquals("France@gmail.com", customerDao.findCustomerById(2L).getEmailAsUsername());
   }
 
   @Test
   void getPassword() {
-    assertEquals("34567", userDao.findUserByEmailAsUsername("Brazil@gmail.com").getPassword());
+    assertEquals("34567", customerDao.findCustomerByEmailAsUsername("Brazil@gmail.com").getPassword());
   }
 
   @Test

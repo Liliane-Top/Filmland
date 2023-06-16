@@ -5,39 +5,45 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.Mapping;
 
 @Entity
-@Table(name = "users")
+@Table(name = "Customer")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Customer {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "Customer_id")
   private Long id;
 
   @NotBlank
   @Email
-  @Column(name = "EMAILASUSERNAME", unique=true)
+  @Column(name = "email_as_username", unique = true)
   private String emailAsUsername;
 
   @NotBlank
   @Size(max = 120)
   private String password;
 
+  @ManyToMany(mappedBy = "customers")
+  private Set<Subscription> subscriptions;
 
 }
