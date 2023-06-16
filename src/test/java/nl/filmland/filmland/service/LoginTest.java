@@ -1,6 +1,8 @@
 package nl.filmland.filmland.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import nl.filmland.dto.LoginDto;
 import nl.filmland.filmland.repository.UserDao;
@@ -21,15 +23,26 @@ class LoginTest {
   @Test
   void getUserNameFromH2() {
     assertEquals("France@gmail.com", userDao.findUserById(2L).getEmailAsUsername());
-
   }
+
   @Test
-   void getPassword() {
+  void getPassword() {
     assertEquals("34567", userDao.findUserByEmailAsUsername("Brazil@gmail.com").getPassword());
   }
 
   @Test
-  void validatePassword_withUnknownUser(){
+  void validateUser_withoutCredentials() {
+    assertFalse(subject.validateUser(null));
+  }
+
+  @Test
+  void validateUser_withoutInvalidUserName() {
+    LoginDto userWithInvalidUsername = TestLoginDto.createUserWithInvalidUsername();
+    assertFalse(subject.validateUser(userWithInvalidUsername));
+  }
+
+  @Test
+  void validatePassword_withUnknownUser() {
     LoginDto unknownUser = TestLoginDto.createUnknowUser();
     assertFalse(subject.validateUser(unknownUser));
   }
@@ -42,7 +55,7 @@ class LoginTest {
 
   @Test
   void validatePassword_withValidCredentials() {
-   LoginDto knownUserWithInvalidPassword = TestLoginDto.createUserWithValidPassword();
+    LoginDto knownUserWithInvalidPassword = TestLoginDto.createUserWithValidPassword();
     assertTrue(subject.validateUser(knownUserWithInvalidPassword));
   }
 

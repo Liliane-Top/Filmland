@@ -21,4 +21,9 @@ public class TestLoginDto {
   }
 
 
+  public static LoginDto createUserWithInvalidUsername() {
+    return LoginDto.builder()
+        .emailAsUsername("LilianeTop")
+        .password("45678").build();
+  }
 }
