@@ -15,19 +15,9 @@ public class SubscriptionDaoTests {
   @Autowired
   SubscriptionDao subject;
 
-  @Autowired
-  CustomerDao customerDao;
-
   @Test
   void getAllSubscriptions(){
     var response = subject.findAll();
     assertEquals(3, response.size());
-
   }
-  @Test
-  void getAllSubscriptionsPerCustomer(){
-    var response = subject.findByCustomers(customerDao.findCustomerById(4L));
-    Assertions.assertEquals(2 , response.size());
-  }
-
 }

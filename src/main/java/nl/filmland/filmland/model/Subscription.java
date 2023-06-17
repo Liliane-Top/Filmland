@@ -6,8 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -43,10 +42,7 @@ public class Subscription {
   @JoinColumn(name = "category_id", referencedColumnName = "category_id")
   private Category category;
 
-  @ManyToMany
-  @JoinTable(name = "Customer_Subscription",
-      joinColumns = @JoinColumn(name = "subscription_id"),
-      inverseJoinColumns = @JoinColumn(name = "customer_id"))
-  private Set<Customer> customers;
+  @OneToMany(mappedBy = "subscription")
+  private Set<CustomerSubscription> customerSubscriptions;
 
 }

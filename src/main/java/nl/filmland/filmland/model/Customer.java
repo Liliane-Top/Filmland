@@ -7,7 +7,10 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Email;
@@ -43,7 +46,7 @@ public class Customer {
   @NotBlank
   @Size(max = 120)
   private String password;
-  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "customers", cascade = CascadeType.PERSIST)
-  private Set<Subscription> subscriptions = new HashSet<>();
+  @OneToMany(mappedBy = "customer")
+  private Set<CustomerSubscription> subscriptions = new HashSet<>();
 
 }

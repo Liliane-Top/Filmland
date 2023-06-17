@@ -12,11 +12,8 @@ public interface SubscriptionDao extends JpaRepository<Subscription, Long> {
 
   List<Subscription> findAll();
 
-  Set<Subscription> findByCustomers(Customer customer);
-
   Subscription findSubscriptionsById(Long id);
 
-//  Subscription save(Customer customer, Subscription subscription);
 
 
 }

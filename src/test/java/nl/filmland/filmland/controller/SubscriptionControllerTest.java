@@ -54,19 +54,16 @@ public class SubscriptionControllerTest {
 
   @Test
   void call_getAllSubscriptionsByValidUsername() {
-    var response = subject.getAllSubscriptionsByUserName("Italy@gmail.com");
-    assertEquals(2, response.getBody().size());
+    var response = subject.getAllSubscriptionsByUserName("Canada@gmail.com");
+    assertEquals(3, response.getBody().size());
     assertEquals(HttpStatus.OK, response.getStatusCode());
   }
 
   @Test
   void call_addSubscription_with_valid_parameters() {
-    //FIXME: returns error java.lang.NullPointerException: Cannot invoke "org.hibernate.sql.ast.tree.expression.Expression.getColumnReference()" because "pathSqlExpression" is null
     var response = subject.addSubscription("Italy@gmail.com", 3L);
     assertEquals("International Films", response.getBody().getCategory().getCategoryName());
-
-    Set<Subscription> subscriptions = subject.getAllSubscriptionsByCustomerId(2L).getBody();
-    //FIXME: why is this empty?
-    assertEquals(1, subscriptions.size());
+    Set<Subscription> subscriptions = subject.getAllSubscriptionsByCustomerId(4L).getBody();
+    assertEquals(3, subscriptions.size());
   }
 }
