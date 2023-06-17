@@ -12,7 +12,6 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,18 +43,10 @@ public class Subscription {
   @JoinColumn(name = "category_id", referencedColumnName = "category_id")
   private Category category;
 
-  // @ManyToMany(cascade = CascadeType.ALL)
-  //    @JoinTable(
-  //            name = "USERS_GROUPS",
-  //            joinColumns = @JoinColumn(name = "GROUP_ID"),
-  //            inverseJoinColumns = @JoinColumn(name = "USER_ID")
-  //    )
-  //    public Set<User> getUsers() {
-
   @ManyToMany
   @JoinTable(name = "Customer_Subscription",
       joinColumns = @JoinColumn(name = "subscription_id"),
       inverseJoinColumns = @JoinColumn(name = "customer_id"))
-  private Set<Customer> customers = new HashSet<>();
+  private Set<Customer> customers;
 
 }

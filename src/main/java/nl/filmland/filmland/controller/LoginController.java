@@ -15,9 +15,7 @@ public class LoginController {
 
   private final LoginService loginService;
 
-
   @PostMapping(produces = "application/json", path = "/login")
-
   public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
     boolean isLoginSuccessful = loginService.validateUser(loginDto);
 
