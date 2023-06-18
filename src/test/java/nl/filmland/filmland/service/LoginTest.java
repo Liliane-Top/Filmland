@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import nl.filmland.dto.LoginDto;
-import nl.filmland.filmland.repository.CustomerDao;
+import nl.filmland.repository.CustomerDao;
 import nl.filmland.filmland.testobjects.TestLoginDto;
+import nl.filmland.service.LoginService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

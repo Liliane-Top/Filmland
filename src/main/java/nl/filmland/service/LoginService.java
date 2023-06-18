@@ -1,9 +1,9 @@
-package nl.filmland.filmland.service;
+package nl.filmland.service;
 
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import nl.filmland.dto.LoginDto;
-import nl.filmland.filmland.repository.CustomerDao;
+import nl.filmland.repository.CustomerDao;
 import org.springframework.stereotype.Service;
 
 @Service

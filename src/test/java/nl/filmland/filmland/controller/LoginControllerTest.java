@@ -1,9 +1,10 @@
 package nl.filmland.filmland.controller;
 
 
+import nl.filmland.controller.LoginController;
 import nl.filmland.dto.LoginDto;
-import nl.filmland.filmland.repository.CustomerDao;
-import nl.filmland.filmland.service.LoginService;
+import nl.filmland.repository.CustomerDao;
+import nl.filmland.service.LoginService;
 import nl.filmland.filmland.testobjects.TestLoginDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -52,6 +53,5 @@ class LoginControllerTest {
     Assertions.assertEquals("Customer login successful", response.getBody());
     Assertions.assertEquals(200, response.getStatusCode().value());
   }
-
 
 }

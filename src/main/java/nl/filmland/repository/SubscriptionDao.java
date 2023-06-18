@@ -1,7 +1,7 @@
-package nl.filmland.filmland.repository;
+package nl.filmland.repository;
 
 import java.util.List;
-import nl.filmland.filmland.model.Subscription;
+import nl.filmland.model.Subscription;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

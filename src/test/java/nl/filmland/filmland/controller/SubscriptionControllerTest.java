@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Set;
-import nl.filmland.filmland.model.Subscription;
+import nl.filmland.controller.SubscriptionController;
+import nl.filmland.model.Subscription;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,21 +27,21 @@ class SubscriptionControllerTest {
 
   @Test
   void call_getAllSubscriptionsByCustomerWithOutSubscriptions() {
-    var response = subject.getAllSubscriptionsByCustomerId(2L);
+    var response = subject.getAllSubscriptionsByUserName("France@gmail.com");
     assertNull(response.getBody());
     assertEquals(204, response.getStatusCode().value());
   }
 
   @Test
   void call_getAllSubscriptionsByCustomerWithSubscriptions() {
-    var response = subject.getAllSubscriptionsByCustomerId(5L);
+    var response = subject.getAllSubscriptionsByUserName("Canada@gmail.com");
     assertEquals(3, requireNonNull(response.getBody()).size());
     assertEquals(HttpStatus.OK, response.getStatusCode());
   }
 
   @Test
   void call_getAllSubscriptionsByUnknownCustomer() {
-    var response = subject.getAllSubscriptionsByCustomerId(6L);
+    var response = subject.getAllSubscriptionsByUserName("Belgium@gmail.com");
     assertNull(response.getBody());
     assertEquals(204, response.getStatusCode().value());
   }
@@ -56,7 +57,7 @@ class SubscriptionControllerTest {
   void call_addSubscription_with_valid_parameters() {
     var response = subject.addSubscription("Brazil@gmail.com", 3L);
     assertEquals("International Films", requireNonNull(response.getBody()).getCategory().getCategoryName());
-    Set<Subscription> subscriptions = subject.getAllSubscriptionsByCustomerId(3L).getBody();
+    Set<Subscription> subscriptions = subject.getAllSubscriptionsByUserName("Brazil@gmail.com").getBody();
     assert subscriptions != null;
     assertEquals(1, subscriptions.size());
   }

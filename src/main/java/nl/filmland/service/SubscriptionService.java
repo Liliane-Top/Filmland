@@ -1,16 +1,16 @@
-package nl.filmland.filmland.service;
+package nl.filmland.service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import nl.filmland.filmland.model.Customer;
-import nl.filmland.filmland.model.CustomerSubscription;
-import nl.filmland.filmland.model.Subscription;
-import nl.filmland.filmland.repository.CustomerDao;
-import nl.filmland.filmland.repository.CustomerSubscriptionDao;
-import nl.filmland.filmland.repository.SubscriptionDao;
+import nl.filmland.model.Customer;
+import nl.filmland.model.CustomerSubscription;
+import nl.filmland.model.Subscription;
+import nl.filmland.repository.CustomerDao;
+import nl.filmland.repository.CustomerSubscriptionDao;
+import nl.filmland.repository.SubscriptionDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,16 +24,6 @@ public class SubscriptionService {
 
   public List<Subscription> getAllSubscriptions() {
     return subscriptionDao.findAll();
-  }
-
-  @Transactional
-  public Set<Subscription> getAllSubscriptionsByCustomer(Long id) {
-    return Optional.ofNullable(customerDao.findCustomerById(id))
-        .map(customer -> customer.getSubscriptions()
-            .stream()
-            .map(CustomerSubscription::getSubscription)
-            .collect(Collectors.toSet()))
-        .orElse(Set.of());
   }
 
   @Transactional

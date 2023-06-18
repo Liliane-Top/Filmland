@@ -1,4 +1,4 @@
-package nl.filmland.filmland;
+package nl.filmland;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

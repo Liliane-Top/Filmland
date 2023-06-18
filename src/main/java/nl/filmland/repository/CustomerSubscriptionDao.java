@@ -1,6 +1,6 @@
-package nl.filmland.filmland.repository;
+package nl.filmland.repository;
 
-import nl.filmland.filmland.model.CustomerSubscription;
+import nl.filmland.model.CustomerSubscription;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomerSubscriptionDao extends JpaRepository<CustomerSubscription, Long> {

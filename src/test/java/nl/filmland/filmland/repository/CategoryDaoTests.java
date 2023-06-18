@@ -2,6 +2,7 @@ package nl.filmland.filmland.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import nl.filmland.repository.CategoryDao;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

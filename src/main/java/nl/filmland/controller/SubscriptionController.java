@@ -1,18 +1,19 @@
-package nl.filmland.filmland.controller;
+package nl.filmland.controller;
 
 import java.util.List;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
-import nl.filmland.filmland.model.Customer;
-import nl.filmland.filmland.model.Subscription;
-import nl.filmland.filmland.service.CustomerService;
-import nl.filmland.filmland.service.SubscriptionService;
+import nl.filmland.model.Customer;
+import nl.filmland.model.Subscription;
+import nl.filmland.service.CustomerService;
+import nl.filmland.service.SubscriptionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -24,16 +25,6 @@ public class SubscriptionController {
   @GetMapping(produces = "application/json", path = "/subscription")
   public ResponseEntity<List<Subscription>> getAllSubscriptions() {
     var subscriptions = subscriptionService.getAllSubscriptions();
-    if (subscriptions.isEmpty()) {
-      return ResponseEntity.noContent().build();
-    }
-    return ResponseEntity.ok(subscriptions);
-  }
-
-  @GetMapping(produces = "application/json", path = "/subscription/{customer_id}")
-  public ResponseEntity<Set<Subscription>> getAllSubscriptionsByCustomerId(
-      @PathVariable("customer_id") Long id) {
-    var subscriptions = subscriptionService.getAllSubscriptionsByCustomer(id);
     if (subscriptions.isEmpty()) {
       return ResponseEntity.noContent().build();
     }

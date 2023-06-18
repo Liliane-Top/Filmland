@@ -1,4 +1,4 @@
-package nl.filmland.filmland.controller;
+package nl.filmland.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
