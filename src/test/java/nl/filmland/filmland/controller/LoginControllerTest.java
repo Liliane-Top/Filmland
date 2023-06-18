@@ -53,5 +53,4 @@ class LoginControllerTest {
     Assertions.assertEquals(200, response.getStatusCode().value());
   }
 
-
 }
