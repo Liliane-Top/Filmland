@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequiredArgsConstructor
 public class SubscriptionController {
@@ -24,16 +25,6 @@ public class SubscriptionController {
   @GetMapping(produces = "application/json", path = "/subscription")
   public ResponseEntity<List<Subscription>> getAllSubscriptions() {
     var subscriptions = subscriptionService.getAllSubscriptions();
-    if (subscriptions.isEmpty()) {
-      return ResponseEntity.noContent().build();
-    }
-    return ResponseEntity.ok(subscriptions);
-  }
-
-  @GetMapping(produces = "application/json", path = "/subscription/{customer_id}")
-  public ResponseEntity<Set<Subscription>> getAllSubscriptionsByCustomerId(
-      @PathVariable("customer_id") Long id) {
-    var subscriptions = subscriptionService.getAllSubscriptionsByCustomer(id);
     if (subscriptions.isEmpty()) {
       return ResponseEntity.noContent().build();
     }

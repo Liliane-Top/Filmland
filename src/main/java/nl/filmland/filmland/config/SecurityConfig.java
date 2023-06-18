@@ -15,26 +15,35 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable)
         .cors(AbstractHttpConfigurer::disable)
-        .authorizeHttpRequests((requests -> requests.requestMatchers("/", "/heartbeat", "/login")
-            .permitAll()
-            .anyRequest()
-            .authenticated()));
+        .authorizeHttpRequests(
+            (requests -> requests.requestMatchers("/", "/heartbeat", "/login")
+                .permitAll()
+                .anyRequest()
+                .authenticated()));
     return http.build();
   }
 
+  //FIXME: authorization is not persisted
 
 //  @Bean
-//  public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
-//    UserDetails user = User.withUsername("")
-//        .password(passwordEncoder.encode(""))
-//        .roles("User")
+//  public DataSource dataSource() {
+//    return new EmbeddedDatabaseBuilder()
+//        .setType(EmbeddedDatabaseType.H2)
+//        .addScript("data.sql")
 //        .build();
-//    return new InMemoryUserDetailsManager(user);
 //  }
 
 //  @Bean
-//  public BCryptPasswordEncoder passwordEncoder() {
-//    return new BCryptPasswordEncoder();
+//  public UserDetailsManager users(DataSource dataSource) {
+//    UserDetails user = User.withDefaultPasswordEncoder()
+//        .username("emailAsUsername")
+//        .password("password")
+////        .roles("USER")
+//        .build();
+//    JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
+//    users.createUser(user);
+//    return users;
 //  }
+
 
 }

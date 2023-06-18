@@ -27,16 +27,6 @@ public class SubscriptionService {
   }
 
   @Transactional
-  public Set<Subscription> getAllSubscriptionsByCustomer(Long id) {
-    return Optional.ofNullable(customerDao.findCustomerById(id))
-        .map(customer -> customer.getSubscriptions()
-            .stream()
-            .map(CustomerSubscription::getSubscription)
-            .collect(Collectors.toSet()))
-        .orElse(Set.of());
-  }
-
-  @Transactional
   public Set<Subscription> getAllSubscriptionsByUsername(String emailAsUsername) {
     return Optional.ofNullable(customerDao.findCustomerByEmailAsUsername(emailAsUsername))
         .map(customer -> customer.getSubscriptions()

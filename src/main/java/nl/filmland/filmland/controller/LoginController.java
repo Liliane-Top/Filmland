@@ -22,6 +22,14 @@ public class LoginController {
     if (!isLoginSuccessful) {
       return new ResponseEntity<>("Customer login failed", HttpStatus.UNAUTHORIZED);
     }
+
+    //FIXME: persist with either Token or with Spring Security
+
+//    String token = Base64Coder.encodeString(loginDto.getEmailAsUsername() + "secret");
+//    HttpHeaders responseHeaders = new HttpHeaders();
+//    responseHeaders.set(HttpHeaders.AUTHORIZATION, token);
+//    return new ResponseEntity<>("Customer login successful", responseHeaders, HttpStatus.OK);
+
     return new ResponseEntity<>("Customer login successful", HttpStatus.OK);
   }
 }
