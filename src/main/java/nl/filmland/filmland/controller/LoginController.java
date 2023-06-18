@@ -15,14 +15,13 @@ public class LoginController {
 
   private final LoginService loginService;
 
-  @PostMapping(produces = "application/json", path = "/login")
+  @PostMapping(produces = "application/json", path = "/login_test")
   public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
     boolean isLoginSuccessful = loginService.validateUser(loginDto);
 
     if (!isLoginSuccessful) {
       return new ResponseEntity<>("Customer login failed", HttpStatus.UNAUTHORIZED);
     }
-
     return new ResponseEntity<>("Customer login successful", HttpStatus.OK);
   }
 }

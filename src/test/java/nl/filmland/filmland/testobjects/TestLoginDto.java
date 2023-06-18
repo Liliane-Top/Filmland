@@ -4,7 +4,7 @@ import nl.filmland.dto.LoginDto;
 
 public class TestLoginDto {
 
-  public static LoginDto createUnknowUser() {
+  public static LoginDto createUnknownUser() {
     return LoginDto.builder().build();
   }
 

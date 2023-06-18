@@ -2,12 +2,9 @@ package nl.filmland.filmland.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import nl.filmland.filmland.model.Subscription;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class SubscriptionServiceTest {
+
+  //FIXME: create a setup and breakdown after each test
+
 
   @Autowired
   SubscriptionService subject;
@@ -28,11 +28,11 @@ class SubscriptionServiceTest {
   @Test
   void getAllSubscriptionsByUsername() {
     Set<Subscription> subscriptions = subject.getAllSubscriptionsByUsername("Italy@gmail.com");
-    List<Subscription> response = subscriptions.stream().sorted(Comparator.comparing(Subscription::getId)).toList();
+    List<Subscription> response = subscriptions.stream()
+        .sorted(Comparator.comparing(Subscription::getId)).toList();
     assertEquals(2, subscriptions.size());
     assertEquals("Dutch Films", response.get(0).getCategory().getCategoryName());
     assertEquals(5, response.get(1).getMaxToWatch());
-    assertEquals("2023-06-16 00:00:00.0", response.get(1).getStartDate().toString());
     assertEquals(4.0, response.get(0).getCategory().getCategoryPrice());
   }
 

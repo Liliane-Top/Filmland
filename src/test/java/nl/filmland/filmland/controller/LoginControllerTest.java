@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class LoginControllerTest {
+class LoginControllerTest {
 
   @Autowired
   LoginController subject;
@@ -31,7 +31,7 @@ public class LoginControllerTest {
 
   @Test
   void call_login_with_unknownUser() {
-    LoginDto unknownUser = TestLoginDto.createUnknowUser();
+    LoginDto unknownUser = TestLoginDto.createUnknownUser();
     var response = subject.login(unknownUser);
     Assertions.assertEquals("Customer login failed", response.getBody());
     Assertions.assertEquals(401, response.getStatusCode().value());

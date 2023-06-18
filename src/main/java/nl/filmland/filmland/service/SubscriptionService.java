@@ -1,6 +1,5 @@
 package nl.filmland.filmland.service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -29,22 +28,33 @@ public class SubscriptionService {
 
   @Transactional
   public Set<Subscription> getAllSubscriptionsByCustomer(Long id) {
-    return Optional.ofNullable(customerDao.findCustomerById(id)).map(customer -> customer.getSubscriptions().stream().map(
-        CustomerSubscription::getSubscription).collect(Collectors.toSet())).orElse(Set.of());
+    return Optional.ofNullable(customerDao.findCustomerById(id))
+        .map(customer -> customer.getSubscriptions()
+            .stream()
+            .map(CustomerSubscription::getSubscription)
+            .collect(Collectors.toSet()))
+        .orElse(Set.of());
   }
 
   @Transactional
   public Set<Subscription> getAllSubscriptionsByUsername(String emailAsUsername) {
-    return Optional.ofNullable(customerDao.findCustomerByEmailAsUsername(emailAsUsername)).map(customer -> customer.getSubscriptions().stream().map(CustomerSubscription::getSubscription).collect(
-        Collectors.toSet())).orElse(Set.of());
+    return Optional.ofNullable(customerDao.findCustomerByEmailAsUsername(emailAsUsername))
+        .map(customer -> customer.getSubscriptions()
+            .stream()
+            .map(CustomerSubscription::getSubscription)
+            .collect(Collectors.toSet()))
+        .orElse(Set.of());
   }
 
   public void addSubscription(Customer customer, Subscription subscription) {
-
     var customerSubscription = CustomerSubscription.builder()
         .customer(customer)
         .subscription(subscription)
         .build();
     customerSubscriptionDao.save(customerSubscription);
+  }
+
+  public Subscription findSubscription(Long id) {
+    return subscriptionDao.findSubscriptionsById(id);
   }
 }

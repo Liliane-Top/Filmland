@@ -5,8 +5,7 @@ import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import nl.filmland.filmland.model.Customer;
 import nl.filmland.filmland.model.Subscription;
-import nl.filmland.filmland.repository.CustomerDao;
-import nl.filmland.filmland.repository.SubscriptionDao;
+import nl.filmland.filmland.service.CustomerService;
 import nl.filmland.filmland.service.SubscriptionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SubscriptionController {
 
   private final SubscriptionService subscriptionService;
-
-  private final SubscriptionDao subscriptionDao;
-
-  private final CustomerDao customerDao;
+  private final CustomerService customerService;
 
   @GetMapping(produces = "application/json", path = "/subscription")
   public ResponseEntity<List<Subscription>> getAllSubscriptions() {
@@ -33,7 +29,7 @@ public class SubscriptionController {
     }
     return ResponseEntity.ok(subscriptions);
   }
-//TODO: only validated customers can retrieve their subscriptions
+
   @GetMapping(produces = "application/json", path = "/subscription/{customer_id}")
   public ResponseEntity<Set<Subscription>> getAllSubscriptionsByCustomerId(
       @PathVariable("customer_id") Long id) {
@@ -44,7 +40,6 @@ public class SubscriptionController {
     return ResponseEntity.ok(subscriptions);
   }
 
-//TODO: only validated customers can retrieve their subscriptions through headers
   @GetMapping(produces = "application/json", path = "/subscription/{email_as_username}")
   public ResponseEntity<Set<Subscription>> getAllSubscriptionsByUserName(
       @PathVariable("email_as_username") String emailAsUsername) {
@@ -56,10 +51,11 @@ public class SubscriptionController {
   }
 
   @PostMapping(produces = "application/json", path = "/subscription/{email_as_username}/{subscription_id}")
-  public ResponseEntity<Subscription> addSubscription(@PathVariable("email_as_username") String emailAsUsername,
-      @PathVariable("subscription_id") Long id){
-    Subscription subscription = subscriptionDao.findSubscriptionsById(id);
-    Customer customer = customerDao.findCustomerByEmailAsUsername(emailAsUsername);
+  public ResponseEntity<Subscription> addSubscription(
+      @PathVariable("email_as_username") String emailAsUsername,
+      @PathVariable("subscription_id") Long id) {
+    Subscription subscription = subscriptionService.findSubscription(id);
+    Customer customer = customerService.findCustomer(emailAsUsername);
     subscriptionService.addSubscription(customer, subscription);
     return new ResponseEntity<>(subscription, HttpStatus.CREATED);
   }

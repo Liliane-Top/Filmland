@@ -43,7 +43,7 @@ class LoginTest {
 
   @Test
   void validatePassword_withUnknownUser() {
-    LoginDto unknownUser = TestLoginDto.createUnknowUser();
+    LoginDto unknownUser = TestLoginDto.createUnknownUser();
     assertFalse(subject.validateUser(unknownUser));
   }
 

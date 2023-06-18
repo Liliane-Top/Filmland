@@ -35,4 +35,6 @@ public class CustomerSubscription {
   @JoinColumn(name = "subscription_id")
   private Subscription subscription;
 
+  //TODO: add a timestamp as a subscription is only valid for 1 month and first month is free
+
 }

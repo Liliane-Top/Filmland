@@ -6,9 +6,9 @@ INSERT INTO Customer (customer_id, email_as_username, password) VALUES (5, 'Cana
 INSERT INTO Category (category_id, category_name, category_price) VALUES (1, 'Dutch Films', 4.0);
 INSERT INTO Category (category_id, category_name, category_price) VALUES (2, 'Dutch Series', 6.0);
 INSERT INTO Category (category_id, category_name, category_price) VALUES (3, 'International Films', 8.0);
-INSERT INTO Subscription (subscription_id, start_date, max_to_watch, category_id) VALUES (1, '2023-6-16', 5, 1);
-INSERT INTO Subscription (subscription_id, start_date, max_to_watch, category_id) VALUES (2, '2023-6-16', 5, 2);
-INSERT INTO Subscription (subscription_id, start_date, max_to_watch, category_id) VALUES (3, '2023-6-16', 5, 3);
+INSERT INTO Subscription (subscription_id, max_to_watch, category_id) VALUES (1, 5, 1);
+INSERT INTO Subscription (subscription_id, max_to_watch, category_id) VALUES (2, 5, 2);
+INSERT INTO Subscription (subscription_id, max_to_watch, category_id) VALUES (3, 5, 3);
 INSERT INTO Customer_Subscription(customer_id, subscription_id) VALUES (4, 1);
 INSERT INTO Customer_Subscription(customer_id, subscription_id) VALUES (4, 2);
 INSERT INTO Customer_Subscription(customer_id, subscription_id) VALUES (5, 1);

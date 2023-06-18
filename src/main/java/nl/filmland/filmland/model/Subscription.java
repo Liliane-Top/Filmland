@@ -10,7 +10,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import java.util.Date;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,9 +30,6 @@ public class Subscription {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "subscription_id")
   private Long id;
-  @NotBlank
-  @Column(name = "start_date")
-  private Date startDate;
   @NotBlank
   @Column(name = "max_to_watch")
   private Integer maxToWatch;
