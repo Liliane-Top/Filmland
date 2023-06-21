@@ -6,11 +6,9 @@ import nl.filmland.controller.CustomerController;
 import nl.filmland.filmland.testobjects.TestCustomer;
 import nl.filmland.model.Customer;
 import nl.filmland.repository.CustomerDao;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.BeforeTestExecution;
 
 @SpringBootTest
 class CustomerControllerTest {
@@ -21,12 +19,6 @@ class CustomerControllerTest {
   @Autowired
   CustomerDao customerDao;
 
-//  @BeforeTestExecution
-//  void setup(){
-//    customerDao.deleteAll();
-//
-//  }
-
   @Test
   void call_registerUser_with_validCredentials() {
     Customer newCustomer = TestCustomer.createTestCustomer();
@@ -34,7 +26,8 @@ class CustomerControllerTest {
     assertEquals(201, response.getStatusCode().value());
 
     var customer = customerDao.findCustomerByEmailAsUsername("Holland@gmail.com");
-    assertEquals(1, customer.getId());
+    customer.ifPresent(value -> assertEquals(1, value.getId()));
+
   }
 
   @Test

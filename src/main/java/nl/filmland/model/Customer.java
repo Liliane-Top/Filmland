@@ -1,10 +1,14 @@
 package nl.filmland.model;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -14,6 +18,7 @@ import jakarta.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +36,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Customer implements UserDetails {
+public class Customer {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,34 +54,12 @@ public class Customer implements UserDetails {
   @OneToMany(mappedBy = "customer")
   private Set<CustomerSubscription> subscriptions = new HashSet<>();
 
+  @ElementCollection(fetch= FetchType.EAGER)
+  @CollectionTable(
+      name="roles",
+      joinColumns = @JoinColumn(name="customer_id")
+  )
+  @Column(name="customer_role")
+  private List<String> roles;
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public String getUsername() {
-    return emailAsUsername;
-  }
-
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return true;
-  }
 }

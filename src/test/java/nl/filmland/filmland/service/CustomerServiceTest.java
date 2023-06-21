@@ -16,7 +16,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 @SpringBootTest
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
-public class CustomerServiceTest {
+class CustomerServiceTest {
 
   @Autowired
   CustomerService subject;
@@ -32,7 +32,7 @@ public class CustomerServiceTest {
     Customer newCustomer = TestCustomer.createTestCustomer();
 
     var response = subject.addCustomer(newCustomer);
-    assertEquals("Holland@gmail.com", response.getUsername());
+    assertEquals("Holland@gmail.com", response.getEmailAsUsername());
     assertTrue(passwordEncoder.matches("12345", response.getPassword()));
     assertEquals(1, response.getId());
 

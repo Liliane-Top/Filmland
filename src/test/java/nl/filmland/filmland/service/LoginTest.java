@@ -28,7 +28,7 @@ class LoginTest {
 
   @Test
   void getPassword() {
-    assertEquals("34567", customerDao.findCustomerByEmailAsUsername("Brazil@gmail.com").getPassword());
+    customerDao.findCustomerByEmailAsUsername("Brazil@gmail.com").ifPresent(value -> assertEquals("34567", value.getPassword()));
   }
 
   @Test

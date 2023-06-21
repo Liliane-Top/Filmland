@@ -24,9 +24,10 @@ public class LoginService {
   }
 
   private boolean passwordIsValid(LoginDto loginDto) {
-    return customerDao
-        .findCustomerByEmailAsUsername(loginDto.getEmailAsUsername())
+    return customerDao.findCustomerByEmailAsUsername(loginDto.getEmailAsUsername())
+        .get()
         .getPassword()
         .equals(loginDto.getPassword());
+
   }
 }

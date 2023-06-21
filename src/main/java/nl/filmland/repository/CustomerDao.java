@@ -1,5 +1,6 @@
 package nl.filmland.repository;
 
+import java.util.Optional;
 import nl.filmland.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerDao extends JpaRepository<Customer, Long> {
 
-  Customer findCustomerByEmailAsUsername(String emailAsUsername);
+  Optional<Customer> findCustomerByEmailAsUsername(String emailAsUsername);
 
   Customer findCustomerById(Long id);
 

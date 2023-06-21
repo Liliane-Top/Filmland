@@ -1,7 +1,6 @@
 package nl.filmland.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,7 @@ public class SubscriptionService {
 
   @Transactional
   public Set<Subscription> getAllSubscriptionsByUsername(String emailAsUsername) {
-    return Optional.ofNullable(customerDao.findCustomerByEmailAsUsername(emailAsUsername))
+    return customerDao.findCustomerByEmailAsUsername(emailAsUsername)
         .map(customer -> customer.getSubscriptions()
             .stream()
             .map(CustomerSubscription::getSubscription)
