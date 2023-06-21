@@ -1,10 +1,10 @@
 package nl.filmland.service;
 
 import java.util.Optional;
-import lombok.RequiredArgsConstructor;
 import nl.filmland.model.Customer;
-import nl.filmland.model.MyUserPrincipal;
+import nl.filmland.model.CustomerPrincipal;
 import nl.filmland.repository.CustomerDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,12 +12,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class CustomerService implements UserDetailsService {
 
-  private final CustomerDao customerDao;
-
-  private final PasswordEncoder passwordEncoder;
+  @Autowired
+  private CustomerDao customerDao;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   public Customer findCustomer(String emailAsUsername) {
     return customerDao.findCustomerByEmailAsUsername(emailAsUsername)
@@ -40,7 +40,7 @@ public class CustomerService implements UserDetailsService {
     if (optionalCustomer.isEmpty()) {
       throw new UsernameNotFoundException("user with email: " + username + " not found");
     } else {
-      return new MyUserPrincipal(optionalCustomer.get());
+      return new CustomerPrincipal(optionalCustomer.get());
     }
   }
 

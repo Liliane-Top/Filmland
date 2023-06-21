@@ -53,13 +53,7 @@ public class Customer {
   private String password;
   @OneToMany(mappedBy = "customer")
   private Set<CustomerSubscription> subscriptions = new HashSet<>();
-
-  @ElementCollection(fetch= FetchType.EAGER)
-  @CollectionTable(
-      name="roles",
-      joinColumns = @JoinColumn(name="customer_id")
-  )
-  @Column(name="customer_role")
-  private List<String> roles;
+  @Column(name = "role")
+  private String role ;
 
 }

@@ -1,8 +1,8 @@
-INSERT INTO Customer (customer_id, email_as_username, password) VALUES (12 , 'France@gmail.com', '12345');
-INSERT INTO Customer (customer_id, email_as_username, password) VALUES (11, 'USA@gmail.com', '23456');
-INSERT INTO Customer (customer_id, email_as_username, password) VALUES (13, 'Brazil@gmail.com', '34567');
-INSERT INTO Customer (customer_id, email_as_username, password) VALUES (14, 'Italy@gmail.com', '45678');
-INSERT INTO Customer (customer_id, email_as_username, password) VALUES (15, 'Canada@gmail.com', '56789');
+INSERT INTO Customer (customer_id, email_as_username, password, role) VALUES (12 , 'France@gmail.com', '12345', user);
+INSERT INTO Customer (customer_id, email_as_username, password, role) VALUES (11, 'USA@gmail.com', '23456', user);
+INSERT INTO Customer (customer_id, email_as_username, password, role) VALUES (13, 'Brazil@gmail.com', '34567', user);
+INSERT INTO Customer (customer_id, email_as_username, password, role) VALUES (14, 'Italy@gmail.com', '45678', user);
+INSERT INTO Customer (customer_id, email_as_username, password, role) VALUES (15, 'Canada@gmail.com', '56789', user);
 INSERT INTO Category (category_id, category_name, category_price) VALUES (1, 'Dutch Films', 4.0);
 INSERT INTO Category (category_id, category_name, category_price) VALUES (2, 'Dutch Series', 6.0);
 INSERT INTO Category (category_id, category_name, category_price) VALUES (3, 'International Films', 8.0);
