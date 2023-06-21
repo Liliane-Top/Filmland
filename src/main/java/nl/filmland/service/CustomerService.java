@@ -25,6 +25,7 @@ public class CustomerService implements UserDetailsService {
   public Customer addCustomer(Customer newCustomer) {
     return customerDao.save(Customer.builder().emailAsUsername(newCustomer.getEmailAsUsername())
         .password(passwordEncoder.encode(newCustomer.getPassword()))
+            .id(newCustomer.getId())
         .build());
   }
 

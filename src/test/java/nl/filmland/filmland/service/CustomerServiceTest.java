@@ -11,8 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 @SpringBootTest
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class CustomerServiceTest {
 
   @Autowired
@@ -24,15 +27,14 @@ public class CustomerServiceTest {
   @Autowired
   PasswordEncoder passwordEncoder;
 
-//FIXME: DataIntegrityViolation could not execute statement [Unique index or primary key violation
-  //Works fine within Postman and as individual test but not during build
-//  @Test
+  @Test
   void call_addCustomer_with_validCredentials() {
     Customer newCustomer = TestCustomer.createTestCustomer();
 
     var response = subject.addCustomer(newCustomer);
     assertEquals("Holland@gmail.com", response.getUsername());
     assertTrue(passwordEncoder.matches("12345", response.getPassword()));
+    assertEquals(1, response.getId());
 
   }
 

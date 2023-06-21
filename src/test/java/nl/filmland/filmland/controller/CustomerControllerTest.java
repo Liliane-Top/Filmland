@@ -32,6 +32,9 @@ class CustomerControllerTest {
     Customer newCustomer = TestCustomer.createTestCustomer();
     var response = subject.registerUser(newCustomer);
     assertEquals(201, response.getStatusCode().value());
+
+    var customer = customerDao.findCustomerByEmailAsUsername("Holland@gmail.com");
+    assertEquals(1, customer.getId());
   }
 
   @Test
