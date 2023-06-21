@@ -27,6 +27,8 @@ public class CustomerController {
     if (response != null) {
       return new ResponseEntity<>("User registration failed", BAD_REQUEST);
     }
+
+    customerService.addCustomer(newCustomer);
     return new ResponseEntity<>("User registration successful", CREATED);
   }
 

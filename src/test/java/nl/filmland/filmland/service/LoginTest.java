@@ -23,7 +23,7 @@ class LoginTest {
 
   @Test
   void getUserNameFromH2() {
-    assertEquals("France@gmail.com", customerDao.findCustomerById(2L).getEmailAsUsername());
+    assertEquals("France@gmail.com", customerDao.findCustomerById(12L).getEmailAsUsername());
   }
 
   @Test

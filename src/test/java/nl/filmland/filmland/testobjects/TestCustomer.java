@@ -4,7 +4,7 @@ import nl.filmland.model.Customer;
 
 public class TestCustomer {
 
-  public static Customer createTestCustomer(){
+  public static Customer createTestCustomer() {
     return Customer.builder()
         .emailAsUsername("Holland@gmail.com")
         .password("12345")
